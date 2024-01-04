@@ -1,0 +1,43 @@
+0. Configure git
+
+        git config --global user.name "myname"
+        git config --global user.email "name@domain.com"
+        git config --global init.defaultBranch main
+    
+    Go to github page / user badge (top right) / settings / developer settings (at the end) / personal access tokens / tokens (classic) / generate new token
+    Fill the form
+    Copy the token with this format: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+1. Go to git and create a new repository
+
+    https://github.com/USER
+    Top right corner + / New repository
+    
+2. Configure repository
+
+    Set a name and optional description
+    Do not add readme file
+    Create repository
+    
+3. Sync with local files
+
+        cd /path/to/project
+        echo "#repository_name" > README.md
+        echo "optional_description" >> README.md
+        git init
+        git add .
+        git commit -m "initial commit"
+        git branch -M main
+        git remote add origin https://github.com/USER/repository_name.git
+        git pull -v --allow-unrelated-histories
+        git push -u origin main
+    
+    When pass is asked, paste the token generated in step 0, then cache the token with:
+    
+        git config --global credential.helper cache
+    
+    To delete the token from cache:
+    
+        git config --global --unset credential.helper
+        git config --system --unset credential.helper
+        git pull -v

@@ -1,0 +1,56 @@
+How to transfer WP site in hosting A to hosting B and keep site content.
+
+1. Buckup site files from A
+
+    Login to hosting A
+    Go to CPanel and File Manager
+    If domain is the primary domain
+        right click over 'public_html' and Compress, then download compressed file
+    If it is not the primary domain, go to 'domains' and proceed with the desired domain
+    
+2. Buckup DB file from A
+
+    Go to CPanel and phpMyAdmin
+    Click in Export in the top menu, select quick method and SQL format and Export, sql will be downloaded
+
+3. Transfer domain from A to B
+
+    In A, go to CPanel and Domains, My Domains, Manage your domain, Security 
+    Unlock transfer lock (it could be blocked for up to 60 days)
+    Transfer Authorization get EPP code or send it to admin
+    Login to hosting B
+    Go to Transfer Domain (outside CPanel) and write domain to transfer (for example mydomain.com) and EPP code
+    Domain renewal will be charged even if it is not due date
+    Transfer could last up to a week
+    
+4. Set up nameservers (NS) and DNS in B
+
+    In B go to Domains and DNS / Nameservers, configure all NS to the defaults
+    Go to CPanel and Account Manager and Domain Setup, 
+        add a new domain and write the domain without http:// or https://, check Secure SSL and Create
+    Now wait, it can take up to 48 hours
+        you can check the process in https://www.whatsmydns.net/, make sure NS is found in all servers
+
+5. Import DB file to B
+
+    Go to CPanel and MySQL Managment or MySQL Databases
+    Create a new DB (DB_NAME) and add user (name DB_USER and password DB_PASS)
+    Go to CPanel and phpMyAdmin (use DB_USER AND DB_PASS as credentials if asked)
+    Click in Import in the top menu, Choose File and select the sql file downloaded in step 2, Import
+
+6. Import site files to B
+
+    Go to CPanel and File Manager
+    Decompress zip file downloaded in step 1 and upload all files into '/domains/mydomain/public_html'
+
+7. Configure DB access in B
+
+    Go to CPanel and File Manager
+    Edit '/domains/mydomain/public_html/wp-config.php' file, edit the following 3 lines
+    
+        define('DB_NAME, 'DB_NAME');
+        define('DB_USER, 'DB_USER');
+        define('DB_PASSWORD, 'DB_PASS');
+        
+    Save file and close it
+     

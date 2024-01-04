@@ -1,0 +1,119 @@
+
+1. Create a developers account
+
+    https://developers.facebook.com/async/registration/dialog/?src=default
+    Type your phone and click send verification code (SMS)
+    Type code, continue
+    Check primary email and confirm email
+    choose account type: developer, student..., complete registration
+
+2. Create an app 
+
+    https://developers.facebook.com/, top menu My Apps, Create App
+    other, business, next
+    choose app name, contact email and do not set a business account
+    type FB password
+
+3. Create a business account
+
+    https://business.facebook.com/, create an account
+    Set business name, your name and email, create
+    Confirm email address in email sent
+
+4. Verify your business
+
+    ESTO CREO QUE SÍ
+    https://www.facebook.com/business-support-home/
+    If account restricted, then continue request
+    Check catcha and continue
+    Send code by SMS or whats 
+    Write code and continue
+    Upload a picture of your face
+    Upload a picture of your ID or driving licence
+    Close
+    You are not able to proceed untill your account is reviewed (24h aprox)
+    
+5. Add product to the app
+
+    https://developers.facebook.com/
+    Top menu, my apps
+    Click your app
+    Scroll to whatsApp and click on set up
+    Select your business and continue
+    Start using the API
+    Regenerate token
+    Copy temporary access token (bearer, it expires en 24 h)
+    Messages will be sent from a test number +15xxxxxxxxxx (copy phone number ID 16151xxxxxxxxxx)
+    Messages will be sent to your phone number, write your phone, send code to your whatsapp and write 5-digit code, next
+    Click Send message to send test to your whatsapp
+
+6. Create a permanent bearing token (add system user)
+
+    https://business.facebook.com/settings
+    Users in left menu and system users
+    Add new user
+    Accept and done
+    Set name, for example admin, role as admin and create system user
+    Accept and done
+    Add assets
+    Aplications, select app and give full control, save changes, done
+    Generate new token, select your app, set token expiration to never, check whatsapp_business_messaging and whatsapp_business_management permission and generate token
+    Copy token BEARER_KEY_HERE_FROM_STEP_6
+    
+7. Create bot script
+
+    Use this command to send text:
+
+        curl -i -X POST https://graph.facebook.com/v17.0/16151xxxxxxxxxx/messages -H "Authorization: Bearer BEARER_KEY_HERE_FROM_STEP_6" -H "Content-Type: application/json" -d "{ \"messaging_product\": \"whatsapp\", \"to\": \"YOUR_PHONE_WITH_COUNTRY_CODE_BUT_NO_PLUS\", \"type\": \"text\", \"text\": { \"body\": \"MESSAGE_TO_SEND\" } }"
+
+        OUTPUT is similar to this:
+
+        HTTP/2 200 
+        content-type: application/json; charset=UTF-8
+        vary: Origin
+        x-business-use-case-usage: {"13666xxxxxxxxxx":[{"type":"whatsapp","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}
+        access-control-allow-origin: *
+        facebook-api-version: v18.0
+        strict-transport-security: max-age=15552000; preload
+        pragma: no-cache
+        cache-control: private, no-cache, no-store, must-revalidate
+        expires: Sat, 01 Jan 2000 00:00:00 GMT
+        x-fb-request-id: A_JWz3DE109QdF-xxxxxxxx
+        x-fb-trace-id: FENna9/xxxx
+        x-fb-rev: 1009xxxxxx
+        x-fb-debug: ELB3FFcbuaxxx/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx==
+        content-length: 200
+        date: Thu, 19 Oct 2023 15:10:13 GMT
+        alt-svc: h3=":443"; ma=86400
+
+        {"messaging_product":"whatsapp","contacts":[{"input":"34699999999","wa_id":"34699999999"}],"messages":[{"id":"wamid.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","message_status":"accepted"}]}
+
+    Save file in mybot.sh, for example
+
+8. Configure project in Glitch
+
+    Sign up and log in into Glitch
+    Create a new project
+    Go to https://developers.facebook.com, My Apps, select app, scrolldown to whatsapp, settings, api setup on side menu and copy phone number ID
+    Create new files and copy all needed local files into glitch (copy/paste text one by one)
+    Create an additional file called .env and add the following variables:
+    
+        BEARER_TOKEN=BEARER_KEY_HERE_FROM_STEP_6
+        PHONE_ID_FROM=PHONE_ID_FROM_STEP_8
+        PHONE_TO=YOUR_PHONE_WITH_COUNTRY_CODE_BUT_NO_PLUS
+
+    Create an additional file called package.json with this content
+
+        {
+          "name": "my-app",
+          "version": "0.0.1",
+          "description": "short description",
+          "scripts": {
+            "start": "./mybot.sh"
+          }
+        }
+
+    The script will run automatically
+    Click LOGS in the bottom menu, if 'Press CTRL+C to quit' is the last line everything is all right
+    Click on Share button and copy live-site
+   

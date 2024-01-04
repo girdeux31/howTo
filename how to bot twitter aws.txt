@@ -1,0 +1,124 @@
+1. Create a twitter account
+
+    If you are signed in into twitter, you need to sign out from all your accounts
+    https://twitter.com/i/flow/signup
+    Create an account with phone or email option
+    Set a proper name, use an existing email but use points anywhere in the email name to trick twitter, set birthday
+    Write the code sent to email
+    Set a proper password
+    Do not protect tweets
+    Follow someone, unfollow him
+    More / Settings and privacy / Your account / account information / write password / phone / add phone number / pass again / write number / write code
+
+2. Create twitter app
+
+    https://developer.twitter.com/en/products/twitter-api
+    Sign up
+    Set name, country, use making a bot, no to question, next, check and submit, confirm your email
+    Set app name, do not copy keys yet
+
+3. Get API keys
+
+    Developer portal
+    User authentication settings / Set up
+    Turn on OAuth 2.0 and 1.0a
+    Type of App Automated App or bot
+    App permissions Read and Write
+    Callback URI: http://localhost:3000
+    Website URL just type one
+    Save
+    Make sure about permissions again
+    Go to project / Keys and tokens
+    API Key and Secret / Re-Generate / Save them
+    Authentication Tokens / Access Token and Secret / Generate / Save them
+
+4. Create python script (fill keys and tokens)
+
+        import tweepy
+
+        API_KEY = 
+        API_KEY_SECRET = 
+        ACCESS_TOKEN = 
+        ACCESS_TOKEN_SECRET =
+
+        tweet = 'Hello world!'
+
+        client = tweepy.Client(consumer_key=API_KEY, consumer_secret=API_KEY_SECRET, access_token=ACCESS_TOKEN, access_token_secret=ACCESS_TOKEN_SECRET)
+        client.create_tweet(text=tweet)
+
+    Save file as mybot.py
+    If you get 'tweepy.errors.Unauthorized: 401 Unauthorized', then regenerate all keys 
+
+    Create requirements.txt
+    use pip show module_1, module_n to check library versions, for example:
+
+        tweepy==4.10.0
+        python-dotenv==0.20.0
+
+5. Configure AWS
+
+    Create AWS account
+
+    https://portal.aws.amazon.com/billing/signup#/start/email
+
+    Credit card will be asked, as in 2024 you have 750 h free/month for a year, that is more thna enough
+
+    Go to EC2 service
+    Lunch a new instance
+    Write a name (twitter bot for example)
+    AMI: Amazon Linux 2023 AMI (make sure it is free tier eligible)
+    Arquitecture: 64 bits (x86)
+    Instance type: t2.micro (make sure it is free tier eligible)
+    Create new key pair: aws as name, RSA as type and .pem as format, and create key pair, a file will be downloaded
+    Network settings / Allow SSH trafic from / My IP
+    Finally Lunch Instance
+
+6. Connect and configure EC2
+
+    Connect to EC2
+    Open a console, go to where the aws.pem file is and run:
+
+        ssh -i "aws.pem" ec2-user@ec2-XXX-XXX-XXX-XXX.eu-west-3.compute.amazonaws.com
+
+    Then in the EC2 run:
+
+        sudo yum -y install python-pip
+
+    Make sure you have python with:
+
+        python3 -V
+
+7. Configure App
+
+    Still in the EC2:
+
+        mkdir mybot
+
+    Now go back to local (your laptop) where the aws.pem file is and transfer files:
+
+        scp -i "aws.pem" mybot.py ec2-user@ec2-XXX-XXX-XXX-XXX.eu-west-3.compute.amazonaws.com:~/mybot
+        scp -i "aws.pem" requirements.txt ec2-user@ec2-XXX-XXX-XXX-XXX.eu-west-3.compute.amazonaws.com:~/mybot
+
+    Go back to EC2
+
+    At the end of ~/.bashrc write these environmental variables (include export on each variable) and more if you need to:
+
+        vi ~/.bashrc
+
+        export API_KEY=FILL
+        export API_KEY_SECRET=FILL
+        export ACCESS_TOKEN=FILL
+        export ACCESS_TOKEN_SECRET=FILL
+
+    Import new variables as:
+
+        source ~/.bashrc
+
+8. Run App
+
+        cd mybot
+        chmod 750 mybot.py
+        nohup python3 mybot.py &
+
+    Now you can logout with Ctrl + D
+

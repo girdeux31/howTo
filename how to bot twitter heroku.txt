@@ -1,0 +1,131 @@
+1. Create a twitter account
+
+    If you are signed in into twitter, you need to sign out from all your accounts
+    https://twitter.com/i/flow/signup
+    Create an account with phone or email option
+    Set a proper name, use an existing email but use points anywhere in the email name to trick twitter, set birthday
+    Write the code sent to email
+    Set a proper password
+    Do not protect tweets
+    Follow someone, unfollow him
+    More / Settings and privacy / Your account / account information / write password / phone / add phone number / pass again / write number / write code
+
+2. Create twitter app
+
+    https://developer.twitter.com/en/products/twitter-api
+    Sign up
+    Set name, country , use making a bot, no to question, next, check and submit, confirm your email
+    Set app name, do not copy keys yet
+
+3. Get API keys
+
+    Developer portal
+    User authentication settings / Set up
+    Turn on OAuth 2.0 and 1.0a
+    Type of App Automated App or bot
+    App permissions Read and Write
+    Callback URI: http://localhost:3000
+    Website URL just type one
+    Save
+    Make sure about permissions again
+    Go to project / Keys and tokens
+    API Key and Secret / Re-Generate / Save them
+    Authentication Tokens / Access Token and Secret / Generate / Save them
+
+4. Create python script (fill keys and tokens)
+
+        import tweepy
+
+        API_KEY = 
+        API_KEY_SECRET = 
+        ACCESS_TOKEN = 
+        ACCESS_TOKEN_SECRET =
+
+        tweet = 'Hello world!'
+
+        client = tweepy.Client(consumer_key=API_KEY, consumer_secret=API_KEY_SECRET, access_token=ACCESS_TOKEN, access_token_secret=ACCESS_TOKEN_SECRET)
+        client.create_tweet(text=tweet)
+
+    Save file as mybot.py
+    If you get 'tweepy.errors.Unauthorized: 401 Unauthorized', then regenerate all keys 
+
+    Create requirements.txt
+    use pip show module_1, module_n to check library versions, for example:
+
+        tweepy==4.10.0
+        python-dotenv==0.20.0
+
+5. Configure Heroku
+
+    Create Heroku account
+
+    https://signup.heroku.com/login
+
+    Install Heroku CLI
+
+    Windows: download installed
+    https://devcenter.heroku.com/articles/heroku-cli#install-the-heroku-cli -> heroku-x64.exe
+    You may need to install git for windows
+    Git-2.35.1.2-64-bit.exe
+
+    Ubuntu: run command, autoupdate manually
+    
+        sudo apt install curl
+        curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
+    Create a new app in Heroku
+
+    New/Create new app
+    App name: app_name
+    Region: Europe
+    Create App
+
+6. Configure Git
+
+        cd /path/to/app_name
+        git init
+        git config --global init.defaultBranch main
+        git config --global user.email "my_name@domain.com"
+        git config --global user.name "MyName"
+        heroku git:remote -a app_name
+        
+    press any key and login to heroku
+
+7. Configure App
+
+        cd /path/to/app_name
+
+    create file .gitignore
+    copy from https://github.com/github/gitignore/blob/main/Python.gitignore
+
+    create file Procfile, content is:
+    
+        worker: python app_name.py
+
+    create runtime.txt, content is:
+    
+        python-3.10.4
+
+8. Upload the project to heroku
+
+        heroku login
+        
+    press any key and login to heroku
+    
+        git add .
+        git commit -m "initial deploy"
+        git push heroku main
+
+9. Start app
+
+    Set environmental variables
+
+    Go to Settings / Config Vars / Reveal Config Vars, add one by one
+
+    API_KEY = 
+    API_KEY_SECRET = 
+    ACCESS_TOKEN = 
+    ACCESS_TOKEN_SECRET =
+
+    Go to Resources and activate the worker (pencil, check, confirm)
+
