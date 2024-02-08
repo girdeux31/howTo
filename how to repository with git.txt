@@ -7,6 +7,9 @@
     Go to github page / user badge (top right) / settings / developer settings (at the end) / personal access tokens / tokens (classic) / generate new token
     Fill the form
     Copy the token with this format: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    
+    If you don't have a ssh-key public/private key pair, create them.
+    https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key
 
 1. Go to git and create a new repository
 
@@ -16,7 +19,7 @@
 2. Configure repository
 
     Set a name and optional description
-    Do not add readme file
+    Do not add readme file nor license file
     Create repository
     
 3. Sync with local files
