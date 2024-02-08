@@ -4,10 +4,6 @@
         git config --global user.email "name@domain.com"
         git config --global init.defaultBranch main
     
-    Go to github page / user badge (top right) / settings / developer settings (at the end) / personal access tokens / tokens (classic) / generate new token
-    Fill the form
-    Copy the token with this format: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    
     If you don't have a ssh-key public/private key pair, create them.
     https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key
 
@@ -34,13 +30,3 @@
         git remote add origin https://github.com/USER/repository_name.git
         git pull -v --allow-unrelated-histories
         git push -u origin main
-    
-    When pass is asked, paste the token generated in step 0, then cache the token with:
-    
-        git config --global credential.helper cache
-    
-    To delete the token from cache:
-    
-        git config --global --unset credential.helper
-        git config --system --unset credential.helper
-        git pull -v
