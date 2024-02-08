@@ -68,7 +68,7 @@
     You may need to install git for windows
     Git-2.35.1.2-64-bit.exe
 
-    Ubuntu: run command, autoupdate manually
+    Ubuntu: run command, auto update manually
     
         sudo apt install curl
         curl https://cli-assets.heroku.com/install-ubuntu.sh | sh

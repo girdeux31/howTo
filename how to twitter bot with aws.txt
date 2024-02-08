@@ -61,16 +61,16 @@
 
     https://portal.aws.amazon.com/billing/signup#/start/email
 
-    Credit card will be asked, as in 2024 you have 750 h free/month for a year, that is more thna enough
+    Credit card will be asked, as in 2024 you have 750 h free/month for a year, that is more than enough
 
     Go to EC2 service
     Lunch a new instance
     Write a name (twitter bot for example)
     AMI: Amazon Linux 2023 AMI (make sure it is free tier eligible)
-    Arquitecture: 64 bits (x86)
+    Architecture: 64 bits (x86)
     Instance type: t2.micro (make sure it is free tier eligible)
     Create new key pair: aws as name, RSA as type and .pem as format, and create key pair, a file will be downloaded
-    Network settings / Allow SSH trafic from / My IP
+    Network settings / Allow SSH traffic from / My IP
     Finally Lunch Instance
 
 6. Connect and configure EC2

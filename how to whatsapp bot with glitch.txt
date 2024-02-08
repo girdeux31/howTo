@@ -22,16 +22,15 @@
 
 4. Verify your business
 
-    ESTO CREO QUE SÍ
     https://www.facebook.com/business-support-home/
     If account restricted, then continue request
     Check catcha and continue
     Send code by SMS or whats 
     Write code and continue
     Upload a picture of your face
-    Upload a picture of your ID or driving licence
+    Upload a picture of your ID or driving license
     Close
-    You are not able to proceed untill your account is reviewed (24h aprox)
+    You are not able to proceed until your account is reviewed (24h aprox)
     
 5. Add product to the app
 
@@ -56,9 +55,9 @@
     Set name, for example admin, role as admin and create system user
     Accept and done
     Add assets
-    Aplications, select app and give full control, save changes, done
+    Applications, select app and give full control, save changes, done
     Generate new token, select your app, set token expiration to never, check whatsapp_business_messaging and whatsapp_business_management permission and generate token
-    Copy token BEARER_KEY_HERE_FROM_STEP_6
+    Copy token, we'll call it BEARER_KEY_HERE_FROM_STEP_6
     
 7. Create bot script
 
@@ -94,7 +93,7 @@
 
     Sign up and log in into Glitch
     Create a new project
-    Go to https://developers.facebook.com, My Apps, select app, scrolldown to whatsapp, settings, api setup on side menu and copy phone number ID
+    Go to https://developers.facebook.com, My Apps, select app, scroll down to whatsapp, settings, api setup on side menu and copy phone number ID
     Create new files and copy all needed local files into glitch (copy/paste text one by one)
     Create an additional file called .env and add the following variables:
     

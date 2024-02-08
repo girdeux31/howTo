@@ -1,6 +1,6 @@
 How to transfer WP site in hosting A to hosting B and keep site content.
 
-1. Buckup site files from A
+1. Buck-up site files from A
 
     Login to hosting A
     Go to CPanel and File Manager
@@ -8,7 +8,7 @@ How to transfer WP site in hosting A to hosting B and keep site content.
         right click over 'public_html' and Compress, then download compressed file
     If it is not the primary domain, go to 'domains' and proceed with the desired domain
     
-2. Buckup DB file from A
+2. Buck-up DB file from A
 
     Go to CPanel and phpMyAdmin
     Click in Export in the top menu, select quick method and SQL format and Export, sql will be downloaded
@@ -33,7 +33,7 @@ How to transfer WP site in hosting A to hosting B and keep site content.
 
 5. Import DB file to B
 
-    Go to CPanel and MySQL Managment or MySQL Databases
+    Go to CPanel and MySQL Management or MySQL Databases
     Create a new DB (DB_NAME) and add user (name DB_USER and password DB_PASS)
     Go to CPanel and phpMyAdmin (use DB_USER AND DB_PASS as credentials if asked)
     Click in Import in the top menu, Choose File and select the sql file downloaded in step 2, Import
